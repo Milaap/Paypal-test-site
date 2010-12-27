@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  express_token: MyString
+  express_payer_id: MyString
+
+two:
+  name: MyString
+  express_token: MyString
+  express_payer_id: MyString

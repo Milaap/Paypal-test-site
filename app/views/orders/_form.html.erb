@@ -1,0 +1,41 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <% if @order.express_token.blank? %>
+
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :express_token %><br />
+    <%= f.text_field :express_token %>
+  </div>
+  <div class="field">
+    <%= f.label :express_payer_id %><br />
+    <%= f.text_field :express_payer_id %>
+  </div>
+
+    <% else %>
+         <p>Name: <%=h @order.first_name %> <%=h @order.last_name %></p>
+
+         <%= f.text_field :express_token %>
+
+            Todo <%= request.remote_ip %>
+
+    <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
