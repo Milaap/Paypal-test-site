@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
 
-  attr_accessor :first_name, :last_name, :ip_address
+  attr_accessor :first_name, :last_name, :ip_address, :card_expires_on 
 
   before_create :purchase
 
@@ -8,9 +8,9 @@ class Order < ActiveRecord::Base
   def purchase
   response = process_purchase
 
-  puts "---------------------------------------------#{response.success?}    #{response.inspect}"
+  puts "---------------------------------------------#{response.success?}  #{response.message}  #{response.inspect}"
 
-  response.success?
+  self.errors.add(response.message) unless response.success?
 end
 
 
@@ -33,11 +33,40 @@ end
 
 def process_purchase
   if express_token.blank?
+    p credit_card, "---------------------------"
     STANDARD_GATEWAY.purchase(133.0, credit_card, standard_purchase_options)
   else
     EXPRESS_GATEWAY.purchase(30000, express_purchase_options)
   end
 end
+
+def standard_purchase_options
+    {
+      :ip => ip_address,
+      :billing_address => {
+        :name     => self.first_name + self.last_name,
+        :address1 => self.address1,
+        :city     => self.city,
+        :state    => self.state,
+        :country  => self.country,
+        :zip      => self.zip
+      }
+    }
+end
+
+  def credit_card
+     @credit_card ||= ActiveMerchant::Billing::CreditCard.new(
+       :type               => self.type,
+       :number             => self.number,
+       :verification_value => self.verification_value,
+       :month              => self.month,
+       :year               => self.year,
+       :first_name         => self.first_name,
+       :last_name          => self.last_name
+     )
+   end
+
+
 
 
   def express_purchase_options

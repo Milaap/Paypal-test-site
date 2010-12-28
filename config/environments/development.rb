@@ -33,7 +33,7 @@ Paypal::Application.configure do
   ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
   ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
 end
-
+#paypal_options = {:login =>ask4pr_1293561273_biz_api1.gmail.com, :password => "CK8M5ZEQ66RP4SG6", :signature=> "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AhGnn-DY-N3Adr4VJBDkRPcZEMH8"}
 
 end
 

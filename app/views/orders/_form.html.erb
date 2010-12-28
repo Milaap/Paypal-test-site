@@ -13,19 +13,66 @@
 
     <% if @order.express_token.blank? %>
 
+       
+          <p>
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name %>
+          </p>
+          <p>
+            <%= f.label :last_name %><br />
+            <%= f.text_field :last_name %>
+          </p>
+          <p>
+            <%= f.label :type %><br />
+            <%= f.select :type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+          </p>
+          <p>
+            <%= f.label :number %><br />
+            <%= f.text_field :number %>
+          </p>
+          <p>
+            <%= f.label :verification_value, "Card Verification Value (CVV)" %><br />
+            <%= f.text_field :verification_value %>
+          </p>
+          <p>
+            <%= f.label :year %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <%= f.label:month %><br />
+            <% year = []; (Date.today.year..(Date.today.year+10)).each {|y| year << [y, y]} %>
+            <% month = []; (Date.today.beginning_of_year.month..Date.today.end_of_year.month).each {|m| month << [m, m]} %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :express_token %><br />
-    <%= f.text_field :express_token %>
-  </div>
-  <div class="field">
-    <%= f.label :express_payer_id %><br />
-    <%= f.text_field :express_payer_id %>
-  </div>
+            <%= f.select :year, year %>
+            <%= f.select :month, month %>
+          </p>
+
+            <p>
+            <%= f.label :company %><br />
+            <%= f.text_field :company %>
+          </p>
+            <p>
+            <%= f.label :address1 %><br />
+            <%= f.text_field :address1 %>
+          </p>
+        <p>
+                <%= f.label :city %><br />
+                <%= f.text_field :city %>
+              </p>
+
+<p>
+                <%= f.label :state %><br />
+                <%= f.text_field :state %>
+              </p>
+        <p>
+                        <%= f.label :country %><br />
+                        <%= f.text_field :country %>
+                      </p>
+        <p>
+                        <%= f.label :zip %><br />
+                        <%= f.text_field :zip %>
+                      </p>
+        <p>
+                        <%= f.label :phone %><br />
+                        <%= f.text_field :phone %>
+                      </p>
+
 
     <% else %>
          <p>Name: <%=h @order.first_name %> <%=h @order.last_name %></p>

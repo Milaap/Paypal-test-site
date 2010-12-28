@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new(:express_token => params[:token], :express_payer_id => params[:PayerID])
+    @order.ip_address = request.remote_ip
 
     respond_to do |format|
       format.html # new.html.erb

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101227180639) do
+ActiveRecord::Schema.define(:version => 20101228201527) do
 
   create_table "carts", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,20 @@ ActiveRecord::Schema.define(:version => 20101227180639) do
     t.string   "express_payer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
+    t.string   "number"
+    t.string   "verification_value"
+    t.integer  "month"
+    t.integer  "year"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "company"
+    t.string   "address1"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zip"
+    t.integer  "phone"
   end
 
   create_table "payment_notifications", :force => true do |t|
